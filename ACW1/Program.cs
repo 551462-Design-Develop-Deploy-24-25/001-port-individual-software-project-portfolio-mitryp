@@ -1,9 +1,11 @@
 ﻿namespace ACW1;
 
-class Program
+public class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
     }
+    
+    public static int Add(int a, int b) => a + b;
 }
