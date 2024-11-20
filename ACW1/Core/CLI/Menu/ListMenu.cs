@@ -7,6 +7,8 @@ namespace ACW1.Core.CLI.Menu;
 
 public class ListMenu<TReturn>(string header) : IMenu<TReturn>, IEnumerable<MenuOption<TReturn>>
 {
+    public string Prompt => "Enter command: ";
+
     private readonly List<MenuOption<TReturn>> _options = [];
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

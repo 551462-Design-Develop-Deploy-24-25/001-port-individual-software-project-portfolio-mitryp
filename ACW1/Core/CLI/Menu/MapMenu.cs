@@ -9,6 +9,8 @@ public class MapMenu<TReturn>(
     string header,
     bool caseSensitive = false) : IMenu<TReturn>, IEnumerable<KeyValuePair<string, MenuOption<TReturn>>>
 {
+    public string Prompt => "Enter command: ";
+
     private readonly Dictionary<string, MenuOption<TReturn>> _options = new();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -18,15 +20,13 @@ public class MapMenu<TReturn>(
     public void Add(string key, MenuOption<TReturn> value)
     {
         if (!caseSensitive) key = key.ToLowerInvariant();
-        
+
         _options.Add(key, value);
     }
 
     public virtual MenuOption<TReturn> GetOption(string input)
     {
         var optionKey = input.Trim();
-        Console.WriteLine(optionKey);
-        Console.WriteLine(optionKey.ToLowerInvariant());
         if (!caseSensitive) optionKey = optionKey.ToLowerInvariant();
 
         if (!_options.TryGetValue(optionKey, out var option))

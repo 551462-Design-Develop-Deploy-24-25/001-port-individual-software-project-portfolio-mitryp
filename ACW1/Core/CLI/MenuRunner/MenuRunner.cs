@@ -28,8 +28,8 @@ public class MenuRunner<TReturn>
 
             Console.Clear();
             Console.Write(menu);
-            Console.WriteLine("q: Return back");
-            Console.Write("Enter command: ");
+            Console.WriteLine($"{ReturnCommand}: Return back");
+            Console.Write(menu.Prompt);
 
             MenuOption<TReturn>? option = null;
             do

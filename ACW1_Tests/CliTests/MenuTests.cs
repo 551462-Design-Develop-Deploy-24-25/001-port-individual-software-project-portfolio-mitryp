@@ -46,7 +46,7 @@ public class MenuTests
     [Test]
     public void CaseInsensitiveMapMenuTest()
     {
-        const string name = "list menu";
+        const string name = "map menu";
         const string action1Name = "action1";
         const int action1Value = 1;
         const string action2Name = "action2";
@@ -86,11 +86,11 @@ public class MenuTests
             Assert.That(menu.GetOption(option2Key.ToLowerInvariant()), Is.SameAs(option2));
         });
     }
-    
+
     [Test]
     public void CaseSensitiveMapMenuTest()
     {
-        const string name = "list menu";
+        const string name = "map menu";
         const string action1Name = "action1";
         const int action1Value = 1;
         const string action2Name = "action2";
@@ -119,10 +119,10 @@ public class MenuTests
         {
             Assert.DoesNotThrow(() => menu.GetOption(option1Key));
             Assert.Throws<InvalidCommandException>(() => menu.GetOption(option1Key.ToLowerInvariant()));
-            
+
             Assert.DoesNotThrow(() => menu.GetOption(option2Key));
             Assert.Throws<InvalidCommandException>(() => menu.GetOption(option2Key.ToUpperInvariant()));
-            
+
             Assert.Throws<InvalidCommandException>(() => menu.GetOption("3"));
             Assert.Throws<InvalidCommandException>(() => menu.GetOption("0"));
             Assert.Throws<InvalidCommandException>(() => menu.GetOption("abc"));
@@ -133,5 +133,35 @@ public class MenuTests
             Assert.That(menu.GetOption(option1Key), Is.SameAs(option1));
             Assert.That(menu.GetOption(option2Key), Is.SameAs(option2));
         });
+    }
+
+    [Test]
+    public void InputMenuTest()
+    {
+        const string inputHeader = "input header";
+        const string content = "input\ncontent";
+        const string prompt = "Enter your value: ";
+
+        var menu = new InputMenu<int>(
+            inputHeader,
+            content,
+            prompt,
+            int.Parse
+        )
+        {
+            Validator = i => i is > 0 and < 5
+        };
+
+        Assert.That(menu.ToString(), Does.StartWith($"{inputHeader}\n"));
+        Assert.That(menu.ToString(), Does.Contain($"{content}\n"));
+        Assert.That(menu.Prompt, Is.EqualTo(prompt));
+
+        var res = default(int);
+        menu.GetOption("1").Match(action => action.Execute(out res), _ => res = default);
+
+        Assert.That(res, Is.EqualTo(1));
+        Assert.Throws<InvalidCommandException>(() => menu.GetOption("abc"));
+        Assert.Throws<InvalidCommandException>(() => menu.GetOption("10"));
+        Assert.Throws<InvalidCommandException>(() => menu.GetOption("0"));
     }
 }

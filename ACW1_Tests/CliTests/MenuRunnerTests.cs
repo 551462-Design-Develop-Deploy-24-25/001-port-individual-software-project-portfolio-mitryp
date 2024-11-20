@@ -15,7 +15,7 @@ public class MenuRunnerTests
     private static readonly MenuAction TopAction2 = new("a2", () => TopAction2Value);
     private const string TopAction2Key = "2";
     private const int TopAction2Value = 02;
-    private const string Nested1MenuKey = "3";
+    private const string TopMenu1Key = "3";
     private static readonly MenuAction Nested1Action1 = new("n1_a1", () => Nested1Action1Value);
     private const string Nested1Action1Key = "n1_a1";
     private const int Nested1Action1Value = 11;
@@ -26,13 +26,14 @@ public class MenuRunnerTests
     private static readonly MenuAction Nested2Action = new("n2_a1", () => Nested2ActionValue);
     private const string Nested2ActionKey = "n2_a1";
     private const int Nested2ActionValue = 21;
+    private const string TopMenu2Key = "4";
 
     private readonly IMenu<int> _menu = new ListMenu<int>("Test menu")
     {
         TopAction1,
         TopAction2,
         new NestedMenu(
-            "nested",
+            "nested map",
             new MapMenu<int>("Nested map menu")
             {
                 { Nested1Action1Key, Nested1Action1 },
@@ -46,7 +47,18 @@ public class MenuRunnerTests
                         })
                 }
             }
-        )
+        ),
+        new NestedMenu(
+            "nested input",
+            new InputMenu<int>(
+                "nested input menu",
+                "enter value: ",
+                int.Parse
+            )
+            {
+                Validator = i => i is > 0 and < 5
+            }
+        ),
     };
 
     [Test]
@@ -79,7 +91,7 @@ public class MenuRunnerTests
     [Test]
     public void Nested1Action1Test()
     {
-        var reader = new SequentialCommandReader([Nested1MenuKey, Nested1Action1Key]);
+        var reader = new SequentialCommandReader([TopMenu1Key, Nested1Action1Key]);
         var runner = new MenuRunner<int>(_menu, commandReader: reader);
 
         Assert.That(runner.Run(defaultValue: DefaultValue), Is.EqualTo(Nested1Action1Value));
@@ -88,7 +100,7 @@ public class MenuRunnerTests
     [Test]
     public void Nested1Action2Test()
     {
-        var reader = new SequentialCommandReader([Nested1MenuKey, Nested1Action2Key]);
+        var reader = new SequentialCommandReader([TopMenu1Key, Nested1Action2Key]);
         var runner = new MenuRunner<int>(_menu, commandReader: reader);
 
         Assert.That(runner.Run(defaultValue: DefaultValue), Is.EqualTo(Nested1Action2Value));
@@ -97,7 +109,7 @@ public class MenuRunnerTests
     [Test]
     public void Nested2ActionTest()
     {
-        var reader = new SequentialCommandReader([Nested1MenuKey, Nested2MenuKey, Nested2ActionKey]);
+        var reader = new SequentialCommandReader([TopMenu1Key, Nested2MenuKey, Nested2ActionKey]);
         var runner = new MenuRunner<int>(_menu, commandReader: reader);
 
         Assert.That(runner.Run(defaultValue: DefaultValue), Is.EqualTo(Nested2ActionValue));
@@ -107,10 +119,25 @@ public class MenuRunnerTests
     public void MultipleReturnsTest()
     {
         var reader = new SequentialCommandReader([
-            Nested1MenuKey, MenuRunner<int>.ReturnCommand, Nested1MenuKey, Nested1MenuKey, Nested1Action2Key
+            TopMenu1Key, MenuRunner<int>.ReturnCommand, TopMenu1Key, TopMenu1Key, Nested1Action2Key
         ]);
         var runner = new MenuRunner<int>(_menu, commandReader: reader);
 
         Assert.That(runner.Run(defaultValue: DefaultValue), Is.EqualTo(Nested1Action2Value));
+    }
+
+    [Test]
+    public void InputMenuTest()
+    {
+        const string input1 = "test input!";
+        const string input2 = "12";
+        const string input3 = "-1";
+        const string input4 = "3";
+        var reader = new SequentialCommandReader([
+            TopMenu2Key, input1, input2, input3, input4
+        ]);
+        var runner = new MenuRunner<int>(_menu, commandReader: reader);
+        
+        Assert.That(runner.Run(defaultValue: DefaultValue), Is.EqualTo(int.Parse(input4)));
     }
 }
