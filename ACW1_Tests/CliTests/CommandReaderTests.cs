@@ -1,15 +1,10 @@
 using ACW1_Tests.Mocks;
 using ACW1.Core.CLI.CommandReader;
 
-namespace ACW1_Tests;
+namespace ACW1_Tests.CliTests;
 
 public class CommandReaderTests
 {
-    [SetUp]
-    public void SetUp()
-    {
-    }
-
     [Test]
     public void ReadCommandTest()
     {
@@ -24,8 +19,10 @@ public class CommandReaderTests
     [Test]
     public void MockReadCommandTest()
     {
-        const string testCommand = "testCommand";
-        ICommandReader reader = new FixedCommandReader(testCommand);
-        Assert.That(reader.ReadCommand(), Is.EqualTo(testCommand));
+        const string testCommand1 = "testCommand1";
+        const string testCommand2 = "testCommand2";
+        ICommandReader reader = new SequentialCommandReader([testCommand1, testCommand2]);
+        Assert.That(reader.ReadCommand(), Is.EqualTo(testCommand1));
+        Assert.That(reader.ReadCommand(), Is.EqualTo(testCommand2));
     }
 }
