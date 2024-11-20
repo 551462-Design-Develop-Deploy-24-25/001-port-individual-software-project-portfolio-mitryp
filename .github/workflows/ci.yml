@@ -1,0 +1,28 @@
+name: Unit Tests
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: '8.0.400'
+      - name: Install Test Platform
+        working-directory: /home/runner/work/001-port-individual-software-project-portfolio-mitryp/001-port-individual-software-project-portfolio-mitryp/ACW1
+        run: dotnet add package Microsoft.TestPlatform
+      - name: Dotnet Restore
+        run: dotnet restore
+      - name: Build Project
+        run: dotnet build
+      - name: Run Unit Tests
+        run: dotnet test
