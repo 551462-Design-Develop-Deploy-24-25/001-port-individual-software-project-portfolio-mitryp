@@ -6,5 +6,6 @@
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.MenuOptionTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.MenuTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.MenuRunnerTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.SystemTests.SystemTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
