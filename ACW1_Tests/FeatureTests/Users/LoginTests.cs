@@ -18,7 +18,7 @@ public class LoginTests
     public void TutorLoginTest()
     {
         var reader = new SequentialCommandReader([
-            "asd", "login:pass", "T1:password2", "T1:password1"
+            "asd","q", "login:pass","q", "T1:password2","q", "T1:password1"
         ]);
         var command = new Login(reader);
 
@@ -31,7 +31,7 @@ public class LoginTests
     public void SupervisorLoginTest()
     {
         var reader = new SequentialCommandReader([
-            "asd", "login:pass", "P1:password2", "P1:password3"
+            "asd","q", "login:pass","q", "P1:password2","q", "P1:password3"
         ]);
         var command = new Login(reader);
 
@@ -44,7 +44,7 @@ public class LoginTests
     public void StudentLoginTest()
     {
         var reader = new SequentialCommandReader([
-            "asd", "login:pass", "S1:password1", "S1:password2"
+            "asd", "q", "login:pass", "q", "S1:password1", "q", "S1:password2"
         ]);
         var command = new Login(reader);
 
