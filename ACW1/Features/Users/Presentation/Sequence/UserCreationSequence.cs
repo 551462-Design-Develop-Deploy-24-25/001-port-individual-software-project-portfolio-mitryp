@@ -15,7 +15,7 @@ public class UserCreationSequence : SequenceMenuRunner<dynamic, User>
 
     // todo check supervisor ids?
     public UserCreationSequence(int nextId, ICommandReader commandReader, UserType? typeOverride = null)
-        : base(commandReader)
+        : base(commandReader, false)
     {
         _nextId = nextId;
         _typeOverride = typeOverride;

@@ -6,7 +6,7 @@ using ACW1.Core.System;
 
 namespace ACW1.Core.CLI.MenuRunner;
 
-public abstract class SequenceMenuRunner<TIn, TReturn>(ICommandReader commandReader)
+public abstract class SequenceMenuRunner<TIn, TReturn>(ICommandReader commandReader, bool cancellable)
     : IEnumerable, ISimpleCommand<TIn, TReturn>
 {
     protected abstract Converter<List<dynamic?>, TReturn> Converter { get; }
@@ -42,7 +42,7 @@ public abstract class SequenceMenuRunner<TIn, TReturn>(ICommandReader commandRea
             if (WillSkip(i, results)) continue;
 
             var menu = _menus[i];
-            var runner = new MenuRunner<dynamic>(menu, commandReader);
+            var runner = new MenuRunner<dynamic>(menu, commandReader, cancellable);
 
             results.Add(runner.Run());
         }

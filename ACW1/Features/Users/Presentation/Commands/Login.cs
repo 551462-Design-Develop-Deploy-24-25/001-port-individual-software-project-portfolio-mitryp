@@ -9,7 +9,7 @@ namespace ACW1.Features.Users.Presentation.Commands;
 
 public class Login(ICommandReader reader) : SimpleCommand<List<User>, User>("Login")
 {
-    public override User? Run(List<User> users)
+    public override User Run(List<User> users)
     {
         var menu = new InputMenu<string>("Please enter your ID and password", "Use the ID:PASSWORD format: ",
             s => s)

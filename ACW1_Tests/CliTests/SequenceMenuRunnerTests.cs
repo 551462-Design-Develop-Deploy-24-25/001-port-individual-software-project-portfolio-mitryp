@@ -23,13 +23,13 @@ public class SequenceMenuRunnerTests
             new MenuConnector<int, dynamic>(v => v, menu1),
             new MenuConnector<string, dynamic>(v => v, menu2),
         };
-        var res = sequenceRunner.Run(new WellbeingSystem(new ConsoleCommandReader()));
+        var res = sequenceRunner.Run(0);
         Assert.That(res, Is.EqualTo((1, "abc")));
     }
 
-    private class SequenceRunnerImpl(ICommandReader reader) : SequenceMenuRunner<dynamic, (int, string)>(reader)
+    private class SequenceRunnerImpl(ICommandReader reader) : SequenceMenuRunner<dynamic, (int, string)>(reader, false)
     {
-        public override string CommandName { get; } = "";
+        public override string CommandName => "";
 
         protected override Converter<List<dynamic?>, (int, string)> Converter =>
             list => (list[0]!, list[1]!);
