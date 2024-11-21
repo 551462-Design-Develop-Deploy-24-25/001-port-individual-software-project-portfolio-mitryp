@@ -1,5 +1,6 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AAssert_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F46a322d26154b982566e1817203e5452c91223f93b0e392d9c5b4806696fdc1_003FAssert_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ACastHelpers_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FSourcesCache_003F12728b48859e5c339bb7819b9a9aedc55b0201e8e99c0f32215f4cca043287_003FCastHelpers_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=11de653a_002Dcb37_002D4911_002D9057_002D4c910c2b9d02/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.CommandReaderTests&lt;/TestId&gt;
@@ -8,5 +9,21 @@
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.MenuRunnerTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.SystemTests.SystemTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.EntityTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4837ee46_002D59db_002D42c3_002Da055_002D5e76939e92dc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9783f715_002D05ba_002D4960_002D9c98_002D4ad578ada34c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c240eb25_002D5224_002D41b8_002D97fa_002D1924a006aecf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

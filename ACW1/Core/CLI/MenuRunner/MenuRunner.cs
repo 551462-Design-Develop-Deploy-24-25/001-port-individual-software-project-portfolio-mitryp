@@ -9,8 +9,8 @@ public class MenuRunner<TReturn>
 {
     public const string ReturnCommand = "q";
     
-    private Stack<IMenu<TReturn>> _menuHistory = new();
-    private ICommandReader _commandReader;
+    private readonly Stack<IMenu<TReturn>> _menuHistory = new();
+    private readonly ICommandReader _commandReader;
 
     public MenuRunner(IMenu<TReturn> menu, ICommandReader commandReader)
     {
@@ -18,8 +18,7 @@ public class MenuRunner<TReturn>
         _menuHistory.Push(menu);
     }
 
-
-    public virtual TReturn? Run(TReturn defaultValue = default(TReturn?))
+    public TReturn? Run(TReturn defaultValue = default(TReturn?))
     {
         while (true)
         {
