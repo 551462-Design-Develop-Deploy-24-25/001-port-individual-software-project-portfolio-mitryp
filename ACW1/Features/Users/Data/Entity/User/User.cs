@@ -16,7 +16,7 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
     public string Email { get; } = email;
     public abstract UserType UserType { get; }
 
-    public XmlNode Serialize()
+    public virtual XmlNode Serialize()
     {
         var document = new XmlDocument();
         var rootElement = document.CreateElement("User");
@@ -40,6 +40,8 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         return rootElement;
     }
 
+    public override string ToString() => $"{Id}: {Name}";
+
     public static User Create(XmlNode medium)
     {
         var typeStr = medium.Attributes![TypeAttribute]!.Value;
@@ -54,7 +56,15 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         };
     }
 
-    public override string ToString() => $"{Id}: {Name}";
+    protected static (string Id, string Name, string Email) ParseBase(XmlNode medium)
+    {
+        var attributes = medium.Attributes!;
+        var id = attributes[IdAttribute]!.Value;
+        var email = attributes[EmailAttribute]!.Value;
+        var name = attributes[NameAttribute]!.Value;
+
+        return new(id, name, email);
+    }
 }
 
 public enum UserType

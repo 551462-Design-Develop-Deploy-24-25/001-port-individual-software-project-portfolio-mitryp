@@ -28,4 +28,38 @@ public class EntityTests
             Assert.AreEqual(parsed.Email, tutor.Email);
         });
     }
+
+    [Test]
+    public void SupervisorSerializationTest()
+    {
+        const string id = "P1";
+        const string name = "Supervisor name";
+        const string email = "supervisor@email.com";
+        var ids = new HashSet<string>
+        {
+            "S1",
+            "S5",
+            "S33"
+        };
+        
+        var tutor = new Supervisor(id, name, email, ids);
+        var xml = tutor.Serialize();
+        var parsed = Supervisor.Create(xml);
+
+        Assert.Multiple(() =>
+        {
+            Assert.AreEqual(id, tutor.Id);
+            Assert.AreEqual(name, tutor.Name);
+            Assert.AreEqual(email, tutor.Email);
+            Assert.AreSame(ids, tutor.AssignedStudents);
+        });
+
+        Assert.Multiple(() =>
+        {
+            Assert.AreEqual(parsed.Id, tutor.Id);
+            Assert.AreEqual(parsed.Name, tutor.Name);
+            Assert.AreEqual(parsed.Email, tutor.Email);
+            CollectionAssert.AreEquivalent(parsed.AssignedStudents, tutor.AssignedStudents);
+        });
+    }
 }

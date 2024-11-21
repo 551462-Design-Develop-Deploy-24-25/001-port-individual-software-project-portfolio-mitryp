@@ -8,11 +8,7 @@ public class Tutor(string id, string name, string email) : User(id, name, email)
 
     public new static Tutor Create(XmlNode medium)
     {
-        var attributes = medium.Attributes!;
-        var id = attributes[IdAttribute]!.Value;
-        var email = attributes[EmailAttribute]!.Value;
-        var name = attributes[NameAttribute]!.Value;
-
+        var (id, name, email) = ParseBase(medium);
         return new Tutor(id, name, email);
     }
 }
