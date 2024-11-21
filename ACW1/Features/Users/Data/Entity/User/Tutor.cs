@@ -11,4 +11,10 @@ public class Tutor(string id, string name, string email) : User(id, name, email)
         var (id, name, email) = ParseBase(medium);
         return new Tutor(id, name, email);
     }
+
+    public new static Tutor Create(List<dynamic?> data)
+    {
+        var (_, id, name, email) = ParseBase(data);
+        return new Tutor(id, name, email);
+    }
 }

@@ -8,20 +8,23 @@ public class Student(string id, string name, string email) : User(id, name, emai
 
     public override XmlNode Serialize()
     {
-        // todo add appointments and reports
+        // todo add reports
         var userNode = base.Serialize();
 
         return userNode;
     }
 
-    public new static Supervisor Create(XmlNode medium)
+    public new static Student Create(XmlNode medium)
     {
         var (id, name, email) = ParseBase(medium);
-        var ids = medium.ChildNodes.Cast<XmlNode>()
-            .Select(RelatedUserId.Create)
-            .Select(userId => userId.Content)
-            .ToHashSet();
+        // todo add reports
 
-        return new Supervisor(id, name, email, ids);
+        return new Student(id, name, email);
+    }
+
+    public new static Student Create(List<dynamic?> data)
+    {
+        var (_, id, name, email) = ParseBase(data);
+        return new Student(id, name, email);
     }
 }

@@ -30,6 +30,6 @@ public class SequenceMenuRunnerTests
     private class SequenceRunnerImpl(ICommandReader reader) : SequenceMenuRunner<(int, string)>(reader)
     {
         protected override Converter<List<dynamic?>, (int, string)> Converter =>
-            list => ((int)list[0]!, (string)list[1]!);
+            list => (list[0]!, list[1]!);
     }
 }

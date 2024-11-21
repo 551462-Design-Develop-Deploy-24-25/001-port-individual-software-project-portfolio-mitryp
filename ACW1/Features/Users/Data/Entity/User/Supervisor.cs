@@ -32,4 +32,12 @@ public class Supervisor(string id, string name, string email, HashSet<string> as
 
         return new Supervisor(id, name, email, ids);
     }
+
+    public new static Supervisor Create(List<dynamic?> data)
+    {
+        var (_, id, name, email) = ParseBase(data);
+        HashSet<string> studentIds = data[4]!;
+
+        return new Supervisor(id, name, email, studentIds);
+    }
 }

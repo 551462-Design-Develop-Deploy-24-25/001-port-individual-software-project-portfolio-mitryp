@@ -58,6 +58,19 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         };
     }
 
+    public static User Create(List<dynamic?> data)
+    {
+        UserType type = data[0]!;
+
+        return type switch
+        {
+            UserType.Tutor => Tutor.Create(data),
+            UserType.Supervisor => Supervisor.Create(data),
+            UserType.Student => Student.Create(data),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
     protected static (string Id, string Name, string Email) ParseBase(XmlNode medium)
     {
         var attributes = medium.Attributes!;
@@ -66,6 +79,16 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         var name = attributes[NameAttribute]!.Value;
 
         return new(id, name, email);
+    }
+
+    protected static (UserType Type, string Id, string Name, string Email) ParseBase(List<dynamic?> data)
+    {
+        UserType type = data[0]!;
+        string id = data[1]!;
+        string name = data[2]!;
+        string email = data[3]!;
+
+        return new(type, id, name, email);
     }
 }
 
