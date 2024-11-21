@@ -1,6 +1,7 @@
 using ACW1.Core.CLI.CommandReader;
 using ACW1.Core.CLI.Menu;
 using ACW1.Core.CLI.MenuRunner;
+using ACW1.Features.Users.Data.Auth;
 using ACW1.Features.Users.Data.Entity.User;
 
 namespace ACW1.Features.Users.Presentation.Sequence;
@@ -41,10 +42,17 @@ public class UserCreationSequence : SequenceMenuRunner<dynamic, User>
                 Validator = s => s.StartsWith('P'),
             };
 
+        var passwordSelector =
+            new InputMenu<string>("Password", "Enter your password (at least 8 characters): ", s => s)
+            {
+                Validator = s => s.Length >= 8,
+            };
+
         Add(typeSelector);
         Add(idSelector);
         Add(nameSelector);
         Add(emailSelector);
+        Add(passwordSelector);
         Add(supervisorIdSelector);
     }
 
@@ -55,7 +63,7 @@ public class UserCreationSequence : SequenceMenuRunner<dynamic, User>
             result = _typeOverride;
             return true;
         }
-        
+
         // override the user id with the pre-defined value
         if (index != 1)
         {
@@ -78,9 +86,14 @@ public class UserCreationSequence : SequenceMenuRunner<dynamic, User>
 
     protected override bool WillSkip(int index, List<dynamic?> results)
     {
-        // todo remove student when reviews are added
-        return results.Count >= 4 && (UserType)results[0]! is UserType.Tutor or UserType.Supervisor;
+        return results.Count >= 5 && (UserType)results[0]! is UserType.Tutor or UserType.Supervisor;
     }
 
-    protected override Converter<List<dynamic?>, User> Converter => User.Create;
+    protected override Converter<List<dynamic?>, User> Converter => data =>
+    {
+        string pass = data[4]!;
+        data[4] = new PasswordHash().HashPassword(pass);
+
+        return User.Create(data);
+    };
 }

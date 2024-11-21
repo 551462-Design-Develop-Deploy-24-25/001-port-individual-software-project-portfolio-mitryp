@@ -4,16 +4,18 @@ using ACW1.Core.XML.Interfaces;
 
 namespace ACW1.Features.Users.Data.Entity.User;
 
-public abstract class User(string id, string name, string email) : IXmlSerializable<User>
+public abstract class User(string id, string name, string email, string passwordHash) : IXmlSerializable<User>
 {
     public const string IdAttribute = "id";
     public const string NameAttribute = "name";
     public const string EmailAttribute = "email";
     public const string TypeAttribute = "type";
+    public const string HashAttribute = "hash";
 
     public string Id { get; } = id;
     public string Name { get; } = name;
     public string Email { get; } = email;
+    public string PasswordHash { get; } = passwordHash;
     public abstract UserType UserType { get; }
 
     public virtual XmlNode Serialize()
@@ -36,6 +38,10 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         var nameAttr = document.CreateAttribute(NameAttribute);
         nameAttr.Value = Name;
         rootElement.Attributes.Append(nameAttr);
+
+        var hashAttr = document.CreateAttribute(HashAttribute);
+        hashAttr.Value = PasswordHash;
+        rootElement.Attributes.Append(hashAttr);
 
         return rootElement;
     }
@@ -71,24 +77,26 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         };
     }
 
-    protected static (string Id, string Name, string Email) ParseBase(XmlNode medium)
+    protected static (string Id, string Name, string Email, string Hash) ParseBase(XmlNode medium)
     {
         var attributes = medium.Attributes!;
         var id = attributes[IdAttribute]!.Value;
         var email = attributes[EmailAttribute]!.Value;
         var name = attributes[NameAttribute]!.Value;
+        var hash = attributes[HashAttribute]!.Value;
 
-        return new(id, name, email);
+        return new(id, name, email, hash);
     }
 
-    protected static (UserType Type, string Id, string Name, string Email) ParseBase(List<dynamic?> data)
+    protected static (UserType Type, string Id, string Name, string Email, string Hash) ParseBase(List<dynamic?> data)
     {
         UserType type = data[0]!;
         string id = data[1]!;
         string name = data[2]!;
         string email = data[3]!;
+        string hash = data[4]!;
 
-        return new(type, id, name, email);
+        return new(type, id, name, email, hash);
     }
 }
 

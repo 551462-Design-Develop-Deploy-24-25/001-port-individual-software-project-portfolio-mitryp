@@ -15,6 +15,11 @@
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.DisplayUsersTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=47d14a46_002D2a73_002D4705_002D9409_002D3c069029f9fb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TutorSerializationTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.EntityTests.TutorSerializationTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4837ee46_002D59db_002D42c3_002Da055_002D5e76939e92dc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
@@ -23,6 +28,11 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9783f715_002D05ba_002D4960_002D9c98_002D4ad578ada34c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.CliTests.SequenceMenuRunnerTests.SequenceMenuRunnerTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a9a7cbcd_002D3969_002D4990_002D97da_002D1961ef5361fa/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TutorSerializationTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.EntityTests.TutorSerializationTest&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c240eb25_002D5224_002D41b8_002D97fa_002D1924a006aecf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SequenceMenuRunnerTest #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;

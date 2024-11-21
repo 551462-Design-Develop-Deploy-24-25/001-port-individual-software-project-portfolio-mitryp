@@ -11,10 +11,12 @@ public class MenuRunner<TReturn>
     
     private readonly Stack<IMenu<TReturn>> _menuHistory = new();
     private readonly ICommandReader _commandReader;
+    private readonly bool _cancellable;
 
-    public MenuRunner(IMenu<TReturn> menu, ICommandReader commandReader)
+    public MenuRunner(IMenu<TReturn> menu, ICommandReader commandReader, bool cancellable = true)
     {
         _commandReader = commandReader;
+        _cancellable = cancellable;
         _menuHistory.Push(menu);
     }
 
@@ -27,7 +29,8 @@ public class MenuRunner<TReturn>
 
             Console.Clear();
             Console.Write(menu);
-            Console.WriteLine($"{ReturnCommand}: Return back");
+            if (_cancellable)
+                Console.WriteLine($"{ReturnCommand}: Return back");
             Console.Write(menu.Prompt);
 
             MenuOption<TReturn>? option = null;
@@ -37,7 +40,7 @@ public class MenuRunner<TReturn>
                 {
                     var input = _commandReader.ReadCommand().Trim();
 
-                    if (input == ReturnCommand)
+                    if (_cancellable && input == ReturnCommand)
                     {
                         _menuHistory.Pop();
                         return Run(defaultValue: defaultValue);

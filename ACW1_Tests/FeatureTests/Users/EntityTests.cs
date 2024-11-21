@@ -10,7 +10,8 @@ public class EntityTests
         const string id = "T1";
         const string name = "Tutor Name";
         const string email = "tutor@email.com";
-        var tutor = new Tutor(id, name, email);
+        const string hash = "hash";
+        var tutor = new Tutor(id, name, email, hash);
         var xml = tutor.Serialize();
         var parsed = User.Create(xml);
 
@@ -19,16 +20,18 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, tutor.Id);
-            Assert.AreEqual(name, tutor.Name);
-            Assert.AreEqual(email, tutor.Email);
+            Assert.That(tutor.Id, Is.EqualTo(id));
+            Assert.That(tutor.Name, Is.EqualTo(name));
+            Assert.That(tutor.Email, Is.EqualTo(email));
+            Assert.That(tutor.PasswordHash, Is.EqualTo(hash));
         });
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(parsedTutor.Id, tutor.Id);
-            Assert.AreEqual(parsedTutor.Name, tutor.Name);
-            Assert.AreEqual(parsedTutor.Email, tutor.Email);
+            Assert.That(tutor.Id, Is.EqualTo(parsedTutor.Id));
+            Assert.That(tutor.Name, Is.EqualTo(parsedTutor.Name));
+            Assert.That(tutor.Email, Is.EqualTo(parsedTutor.Email));
+            Assert.That(tutor.PasswordHash, Is.EqualTo(parsedTutor.PasswordHash));
         });
     }
 
@@ -38,7 +41,8 @@ public class EntityTests
         const string id = "T1";
         const string name = "Tutor Name";
         const string email = "tutor@email.com";
-        var data = new List<dynamic?> { UserType.Tutor, id, name, email };
+        const string hash = "hash";
+        var data = new List<dynamic?> { UserType.Tutor, id, name, email, hash };
         var user = User.Create(data);
 
         Assert.That(user, Is.InstanceOf<Tutor>());
@@ -46,9 +50,10 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, tutor.Id);
-            Assert.AreEqual(name, tutor.Name);
-            Assert.AreEqual(email, tutor.Email);
+            Assert.That(tutor.Id, Is.EqualTo(id));
+            Assert.That(tutor.Name, Is.EqualTo(name));
+            Assert.That(tutor.Email, Is.EqualTo(email));
+            Assert.That(tutor.PasswordHash, Is.EqualTo(hash));
         });
     }
 
@@ -58,6 +63,7 @@ public class EntityTests
         const string id = "P1";
         const string name = "Supervisor name";
         const string email = "supervisor@email.com";
+        const string hash = "hash";
         var ids = new HashSet<string>
         {
             "S1",
@@ -65,7 +71,7 @@ public class EntityTests
             "S33"
         };
 
-        var supervisor = new Supervisor(id, name, email, ids);
+        var supervisor = new Supervisor(id, name, email, ids, hash);
         var xml = supervisor.Serialize();
         var parsed = User.Create(xml);
 
@@ -75,17 +81,19 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, supervisor.Id);
-            Assert.AreEqual(name, supervisor.Name);
-            Assert.AreEqual(email, supervisor.Email);
-            Assert.AreSame(ids, supervisor.AssignedStudents);
+            Assert.That(supervisor.Id, Is.EqualTo(id));
+            Assert.That(supervisor.Name, Is.EqualTo(name));
+            Assert.That(supervisor.Email, Is.EqualTo(email));
+            Assert.That(supervisor.AssignedStudents, Is.SameAs(ids));
+            Assert.That(supervisor.PasswordHash, Is.EqualTo(hash));
         });
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(parsedSupervisor.Id, supervisor.Id);
-            Assert.AreEqual(parsedSupervisor.Name, supervisor.Name);
-            Assert.AreEqual(parsedSupervisor.Email, supervisor.Email);
+            Assert.That(supervisor.Id, Is.EqualTo(parsedSupervisor.Id));
+            Assert.That(supervisor.Name, Is.EqualTo(parsedSupervisor.Name));
+            Assert.That(supervisor.Email, Is.EqualTo(parsedSupervisor.Email));
+            Assert.That(supervisor.PasswordHash, Is.EqualTo(parsedSupervisor.PasswordHash));
             CollectionAssert.AreEquivalent(parsedSupervisor.AssignedStudents, supervisor.AssignedStudents);
         });
     }
@@ -96,8 +104,9 @@ public class EntityTests
         const string id = "P1";
         const string name = "Supervisor Name";
         const string email = "supervisor@email.com";
+        const string hash = "hash";
 
-        var data = new List<dynamic?> { UserType.Supervisor, id, name, email };
+        var data = new List<dynamic?> { UserType.Supervisor, id, name, email, hash };
         var user = User.Create(data);
 
         Assert.That(user, Is.InstanceOf<Supervisor>());
@@ -105,9 +114,10 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, supervisor.Id);
-            Assert.AreEqual(name, supervisor.Name);
-            Assert.AreEqual(email, supervisor.Email);
+            Assert.That(supervisor.Id, Is.EqualTo(id));
+            Assert.That(supervisor.Name, Is.EqualTo(name));
+            Assert.That(supervisor.Email, Is.EqualTo(email));
+            Assert.That(supervisor.PasswordHash, Is.EqualTo(hash));
         });
     }
 
@@ -118,7 +128,9 @@ public class EntityTests
         const string name = "Student Name";
         const string email = "studenT@email.com";
         const string supervisor = "P1";
-        var student = new Student(id, name, email, supervisor);
+        const string hash = "hash";
+
+        var student = new Student(id, name, email, supervisor, hash);
         var xml = student.Serialize();
         var parsed = User.Create(xml);
 
@@ -128,18 +140,20 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, student.Id);
-            Assert.AreEqual(name, student.Name);
-            Assert.AreEqual(email, student.Email);
-            Assert.AreEqual(supervisor, student.SupervisorId);
+            Assert.That(student.Id, Is.EqualTo(id));
+            Assert.That(student.Name, Is.EqualTo(name));
+            Assert.That(student.Email, Is.EqualTo(email));
+            Assert.That(student.SupervisorId, Is.EqualTo(supervisor));
+            Assert.That(student.PasswordHash, Is.EqualTo(hash));
         });
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(parsedStudent.Id, student.Id);
-            Assert.AreEqual(parsedStudent.Name, student.Name);
-            Assert.AreEqual(parsedStudent.Email, student.Email);
-            Assert.AreEqual(parsedStudent.SupervisorId, student.SupervisorId);
+            Assert.That(student.Id, Is.EqualTo(parsedStudent.Id));
+            Assert.That(student.Name, Is.EqualTo(parsedStudent.Name));
+            Assert.That(student.Email, Is.EqualTo(parsedStudent.Email));
+            Assert.That(student.SupervisorId, Is.EqualTo(parsedStudent.SupervisorId));
+            Assert.That(student.PasswordHash, Is.EqualTo(parsedStudent.PasswordHash));
             // todo add reports
         });
     }
@@ -152,9 +166,10 @@ public class EntityTests
         const string name = "Student Name";
         const string email = "student@email.com";
         const string supervisor = "P1";
+        const string hash = "hash";
         // todo add reports
 
-        var data = new List<dynamic?> { UserType.Student, id, name, email, supervisor };
+        var data = new List<dynamic?> { UserType.Student, id, name, email, hash, supervisor };
         var user = User.Create(data);
 
         Assert.That(user, Is.InstanceOf<Student>());
@@ -162,10 +177,11 @@ public class EntityTests
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, student.Id);
-            Assert.AreEqual(name, student.Name);
-            Assert.AreEqual(email, student.Email);
-            Assert.AreEqual(supervisor, student.SupervisorId);
+            Assert.That(student.Id, Is.EqualTo(id));
+            Assert.That(student.Name, Is.EqualTo(name));
+            Assert.That(student.Email, Is.EqualTo(email));
+            Assert.That(student.SupervisorId, Is.EqualTo(supervisor));
+            Assert.That(student.PasswordHash, Is.EqualTo(hash));
         });
     }
 }
