@@ -2,6 +2,7 @@ using ACW1_Tests.Mocks;
 using ACW1.Core.CLI.CommandReader;
 using ACW1.Core.CLI.Menu;
 using ACW1.Core.CLI.MenuRunner;
+using ACW1.Core.System;
 
 namespace ACW1_Tests.CliTests;
 
@@ -22,13 +23,14 @@ public class SequenceMenuRunnerTests
             new MenuConnector<int, dynamic>(v => v, menu1),
             new MenuConnector<string, dynamic>(v => v, menu2),
         };
-
-        var res = sequenceRunner.Run();
-        Assert.AreEqual((1, "abc"), res);
+        var res = sequenceRunner.Run(new WellbeingSystem(new ConsoleCommandReader()));
+        Assert.That(res, Is.EqualTo((1, "abc")));
     }
 
-    private class SequenceRunnerImpl(ICommandReader reader) : SequenceMenuRunner<(int, string)>(reader)
+    private class SequenceRunnerImpl(ICommandReader reader) : SequenceMenuRunner<dynamic, (int, string)>(reader)
     {
+        public override string CommandName { get; } = "";
+
         protected override Converter<List<dynamic?>, (int, string)> Converter =>
             list => (list[0]!, list[1]!);
     }

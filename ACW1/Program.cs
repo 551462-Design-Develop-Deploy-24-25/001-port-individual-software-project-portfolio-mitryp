@@ -14,7 +14,7 @@ public class Program
     static void Main(string[] args)
     {
         var userCreation = new UserCreationSequence(1, new ConsoleCommandReader());
-        var user = userCreation.Run();
+        var user = userCreation.Run(new WellbeingSystem(new ConsoleCommandReader()));
         
         Console.WriteLine(user);
     }

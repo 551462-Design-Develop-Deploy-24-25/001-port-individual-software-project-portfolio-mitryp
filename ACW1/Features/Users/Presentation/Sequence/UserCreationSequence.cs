@@ -5,10 +5,12 @@ using ACW1.Features.Users.Data.Entity.User;
 
 namespace ACW1.Features.Users.Presentation.Sequence;
 
-public class UserCreationSequence : SequenceMenuRunner<User>
+public class UserCreationSequence : SequenceMenuRunner<dynamic, User>
 {
     private readonly int _nextId;
     private readonly UserType? _typeOverride;
+
+    public override string CommandName => "Create User";
 
     // todo check supervisor ids?
     public UserCreationSequence(int nextId, ICommandReader commandReader, UserType? typeOverride = null)

@@ -4,7 +4,7 @@ using ACW1.Core.CLI.MenuOption;
 
 namespace ACW1.Core.CLI.Menu;
 
-public class ListSelector<TReturn>(string header, IList<TReturn> options) : IMenu<TReturn>
+public class ListSelector<TReturn>(string header, List<TReturn> options) : IMenu<TReturn>
 {
     public string Prompt => "Select option: ";
     

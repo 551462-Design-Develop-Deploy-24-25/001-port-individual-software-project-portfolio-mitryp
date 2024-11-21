@@ -1,4 +1,6 @@
 using ACW1_Tests.Mocks;
+using ACW1.Core.CLI.CommandReader;
+using ACW1.Core.System;
 using ACW1.Features.Users.Data.Entity.User;
 using ACW1.Features.Users.Presentation.Sequence;
 
@@ -6,6 +8,7 @@ namespace ACW1_Tests.FeatureTests.Users;
 
 public class UserCreationTests
 {
+    private static WellbeingSystem _system = new(new ConsoleCommandReader());
     [Test]
     public void TestStudentCreation()
     {
@@ -18,7 +21,7 @@ public class UserCreationTests
         const int nextId = 1;
         var sequence = new UserCreationSequence(nextId, reader);
 
-        var user = sequence.Run();
+        var user = sequence.Run(_system);
         Assert.That(user, Is.InstanceOf<Student>());
         var student = (Student)user;
         Assert.Multiple(() =>
@@ -29,7 +32,7 @@ public class UserCreationTests
             Assert.That(student.SupervisorId, Is.EqualTo(personalSupervisor));
         });
     }
-    
+
     [Test]
     public void TestSupervisorCreation()
     {
@@ -42,7 +45,7 @@ public class UserCreationTests
         const int nextId = 1;
         var sequence = new UserCreationSequence(nextId, reader);
 
-        var user = sequence.Run();
+        var user = sequence.Run(_system);
         Assert.That(user, Is.InstanceOf<Supervisor>());
         var supervisor = (Supervisor)user;
         Assert.Multiple(() =>
@@ -52,7 +55,7 @@ public class UserCreationTests
             Assert.That(supervisor.Email, Is.EqualTo(email));
         });
     }
-    
+
     [Test]
     public void TestTutorCreation()
     {
@@ -65,7 +68,7 @@ public class UserCreationTests
         const int nextId = 1;
         var sequence = new UserCreationSequence(nextId, reader);
 
-        var user = sequence.Run();
+        var user = sequence.Run(_system);
         Assert.That(user, Is.InstanceOf<Tutor>());
         var tutor = (Tutor)user;
         Assert.Multiple(() =>
@@ -75,7 +78,7 @@ public class UserCreationTests
             Assert.That(tutor.Email, Is.EqualTo(email));
         });
     }
-    
+
     [Test]
     public void TestTypeOverride()
     {
@@ -88,7 +91,7 @@ public class UserCreationTests
         const int nextId = 1;
         var sequence = new UserCreationSequence(nextId, reader, UserType.Tutor);
 
-        var user = sequence.Run();
+        var user = sequence.Run(_system);
         Assert.That(user, Is.InstanceOf<Tutor>());
         var tutor = (Tutor)user;
         Assert.Multiple(() =>
