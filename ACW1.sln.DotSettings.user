@@ -13,6 +13,7 @@
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.UserCreationTests.TestStudentCreation&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.UserCreationTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.DisplayUsersTest&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::705F6FCD-C7A8-4C90-84A2-2B8BFF5D3CF6::net8.0::ACW1_Tests.FeatureTests.Users.LoginTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=47d14a46_002D2a73_002D4705_002D9409_002D3c069029f9fb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TutorSerializationTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
