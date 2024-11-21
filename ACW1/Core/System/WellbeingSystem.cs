@@ -44,6 +44,8 @@ public sealed class WellbeingSystem(IStorage<User> userStorage, ICommandReader c
         new Dashboard(commandReader).Run(this);
     }
 
+    public bool UserExists(string userId) => Users.Any(u => u.Id == userId);
+
     public void AddUser(User user)
     {
         Users.Add(user);

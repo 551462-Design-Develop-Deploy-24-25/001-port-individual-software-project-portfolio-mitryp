@@ -96,6 +96,14 @@ public class Dashboard(ICommandReader reader) : SimpleCommand<WellbeingSystem, i
                 case DashboardAction.AddUser:
                 {
                     var newUser = new UserCreationSequence(system.NextId, reader).Run(0);
+
+                    if (newUser is Student student1 && !system.UserExists(student1.SupervisorId))
+                    {
+                        new LeafCommand(reader).Run(
+                            $"No Supervisor with ID {student1.SupervisorId} exists. Please try again");
+                        continue;
+                    }
+
                     system.AddUser(newUser);
                     new LeafCommand(reader).Run($"New User id is {newUser.Id}");
                     continue;
@@ -112,7 +120,7 @@ public class Dashboard(ICommandReader reader) : SimpleCommand<WellbeingSystem, i
     {
         if (action == DisplayStudentProfileAction.None)
             return;
-        
+
         new LeafCommand(reader).Run("Appointments not implemented yet");
     }
 }
