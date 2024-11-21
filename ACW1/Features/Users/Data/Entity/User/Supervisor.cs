@@ -36,7 +36,7 @@ public class Supervisor(string id, string name, string email, HashSet<string> as
     public new static Supervisor Create(List<dynamic?> data)
     {
         var (_, id, name, email) = ParseBase(data);
-        HashSet<string> studentIds = data[4]!;
+        HashSet<string> studentIds = new();
 
         return new Supervisor(id, name, email, studentIds);
     }

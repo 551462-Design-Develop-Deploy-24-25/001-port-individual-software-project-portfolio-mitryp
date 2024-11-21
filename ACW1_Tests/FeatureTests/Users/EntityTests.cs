@@ -96,13 +96,8 @@ public class EntityTests
         const string id = "P1";
         const string name = "Supervisor Name";
         const string email = "supervisor@email.com";
-        var ids = new HashSet<string>
-        {
-            "S1",
-            "S8"
-        };
 
-        var data = new List<dynamic?> { UserType.Supervisor, id, name, email, ids };
+        var data = new List<dynamic?> { UserType.Supervisor, id, name, email };
         var user = User.Create(data);
 
         Assert.That(user, Is.InstanceOf<Supervisor>());
@@ -113,7 +108,6 @@ public class EntityTests
             Assert.AreEqual(id, supervisor.Id);
             Assert.AreEqual(name, supervisor.Name);
             Assert.AreEqual(email, supervisor.Email);
-            CollectionAssert.AreEqual(ids, supervisor.AssignedStudents);
         });
     }
 
@@ -123,7 +117,8 @@ public class EntityTests
         const string id = "S1";
         const string name = "Student Name";
         const string email = "studenT@email.com";
-        var student = new Student(id, name, email);
+        const string supervisor = "P1";
+        var student = new Student(id, name, email, supervisor);
         var xml = student.Serialize();
         var parsed = User.Create(xml);
 
@@ -136,6 +131,7 @@ public class EntityTests
             Assert.AreEqual(id, student.Id);
             Assert.AreEqual(name, student.Name);
             Assert.AreEqual(email, student.Email);
+            Assert.AreEqual(supervisor, student.SupervisorId);
         });
 
         Assert.Multiple(() =>
@@ -143,6 +139,7 @@ public class EntityTests
             Assert.AreEqual(parsedStudent.Id, student.Id);
             Assert.AreEqual(parsedStudent.Name, student.Name);
             Assert.AreEqual(parsedStudent.Email, student.Email);
+            Assert.AreEqual(parsedStudent.SupervisorId, student.SupervisorId);
             // todo add reports
         });
     }
@@ -154,19 +151,21 @@ public class EntityTests
         const string id = "S1";
         const string name = "Student Name";
         const string email = "student@email.com";
+        const string supervisor = "P1";
         // todo add reports
 
-        var data = new List<dynamic?> { UserType.Student, id, name, email };
+        var data = new List<dynamic?> { UserType.Student, id, name, email, supervisor };
         var user = User.Create(data);
 
         Assert.That(user, Is.InstanceOf<Student>());
-        var supervisor = (Student)user;
+        var student = (Student)user;
 
         Assert.Multiple(() =>
         {
-            Assert.AreEqual(id, supervisor.Id);
-            Assert.AreEqual(name, supervisor.Name);
-            Assert.AreEqual(email, supervisor.Email);
+            Assert.AreEqual(id, student.Id);
+            Assert.AreEqual(name, student.Name);
+            Assert.AreEqual(email, student.Email);
+            Assert.AreEqual(supervisor, student.SupervisorId);
         });
     }
 }
