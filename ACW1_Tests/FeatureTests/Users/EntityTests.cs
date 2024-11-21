@@ -62,4 +62,29 @@ public class EntityTests
             CollectionAssert.AreEquivalent(parsed.AssignedStudents, tutor.AssignedStudents);
         });
     }
+    
+    [Test]
+    public void StudentSerializationTest()
+    {
+        const string id = "S1";
+        const string name = "Student Name";
+        const string email = "studenT@email.com";
+        var student = new Student(id, name, email);
+        var xml = student.Serialize();
+        var parsed = Student.Create(xml);
+
+        Assert.Multiple(() =>
+        {
+            Assert.AreEqual(id, student.Id);
+            Assert.AreEqual(name, student.Name);
+            Assert.AreEqual(email, student.Email);
+        });
+
+        Assert.Multiple(() =>
+        {
+            Assert.AreEqual(parsed.Id, student.Id);
+            Assert.AreEqual(parsed.Name, student.Name);
+            Assert.AreEqual(parsed.Email, student.Email);
+        });
+    }
 }

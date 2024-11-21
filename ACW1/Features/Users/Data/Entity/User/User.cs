@@ -52,7 +52,9 @@ public abstract class User(string id, string name, string email) : IXmlSerializa
         return type switch
         {
             UserType.Tutor => Tutor.Create(medium),
-            _ => throw new DecodeException("User")
+            UserType.Supervisor => Supervisor.Create(medium),
+            UserType.Student => Student.Create(medium),
+            _ => throw new ArgumentOutOfRangeException()
         };
     }
 
