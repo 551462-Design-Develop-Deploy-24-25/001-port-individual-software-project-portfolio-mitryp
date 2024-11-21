@@ -1,7 +1,6 @@
 using System.Xml;
-using System.Xml.Schema;
-using ACW1.Core.XML.Interfaces;
 using ACW1.Core.XML.Exceptions;
+using ACW1.Core.XML.Interfaces;
 
 namespace ACW1.Core.XML;
 
@@ -11,9 +10,6 @@ public abstract class XmlFileStorageBase<TSerializable>(string file, string coll
 {
     protected string FilePath { get; } = file;
     protected string CollectionName { get; } = collectionName;
-
-    private void ValidationCallback(object? sender, ValidationEventArgs args) =>
-        ThrowValidationException(args.Message);
 
     private void ThrowValidationException(string message) =>
         throw new CollectionValidationException(CollectionName, message);
@@ -32,7 +28,6 @@ public abstract class XmlFileStorageBase<TSerializable>(string file, string coll
     {
         var document = new XmlDocument();
         document.Load(FilePath);
-        document.Validate(ValidationCallback);
 
         var root = document.DocumentElement;
 
