@@ -16,14 +16,8 @@ public class DisplaySupervisorProfile(ICommandReader reader) : SimpleCommand<Sup
         Console.WriteLine();
 
         var sb = new StringBuilder($"{supervisor.Id}: {supervisor.Name}\nEmail: {supervisor.Email}\n");
-        sb.AppendLine("Students:");
-        foreach (var studentId in supervisor.AssignedStudents)
-        {
-            // todo join students?
-            sb.AppendLine(studentId);
-        }
-        sb.AppendLine("Appointments:");
         // todo appointments
+        sb.AppendLine("Appointments:");
         
         var selector = new ListMenu<object>(sb.ToString());
 

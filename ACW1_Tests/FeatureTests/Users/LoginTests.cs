@@ -11,7 +11,7 @@ public class LoginTests
     {
         new Tutor("T1", "name1", "email@ea", new PasswordHash().HashPassword("password1")),
         new Student("S1", "name2", "email@ew", "P1", new PasswordHash().HashPassword("password2")),
-        new Supervisor("P1", "name3", "email@eq", new(), new PasswordHash().HashPassword("password3")),
+        new Supervisor("P1", "name3", "email@eq", new PasswordHash().HashPassword("password3")),
     };
 
     [Test]

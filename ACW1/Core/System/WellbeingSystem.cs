@@ -15,7 +15,7 @@ public sealed class WellbeingSystem(IStorage<User> userStorage, ICommandReader c
     internal List<User> Users = [];
     internal int NextId => Users.Count + 1;
 
-    private void Dump() => userStorage.Save(Users);
+    internal void Dump() => userStorage.Save(Users);
 
     public void Initialize()
     {
@@ -32,15 +32,21 @@ public sealed class WellbeingSystem(IStorage<User> userStorage, ICommandReader c
 
         if (Users.Count == 0)
         {
-            var sq = new UserCreationSequence(1, commandReader, UserType.Tutor);
-            var newUser = sq.Run(0);
+            var newUser = new UserCreationSequence(1, commandReader, UserType.Tutor).Run(0);
             Users.Add(newUser);
             Dump();
+            new LeafCommand(commandReader).Run($"New user id is {newUser.Id}");
         }
 
         var user = new Login(commandReader).Run(Users);
         User = user;
-        
-        Console.WriteLine($"Logged in as {user}");
+
+        new Dashboard(commandReader).Run(this);
+    }
+
+    public void AddUser(User user)
+    {
+        Users.Add(user);
+        Dump();
     }
 }

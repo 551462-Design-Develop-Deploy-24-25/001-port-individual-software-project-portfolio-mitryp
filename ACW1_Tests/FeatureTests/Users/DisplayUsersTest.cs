@@ -45,8 +45,8 @@ public class DisplayUsersTest
         var command = new DisplaySupervisors(reader);
         var supervisors = new List<Supervisor>
         {
-            new("P1", "name", "name@emal.com", ["S1, S2"]),
-            new("P2", "name2", "name2@emal.com", []),
+            new("P1", "name", "name@emal.com"),
+            new("P2", "name2", "name2@emal.com"),
         };
 
         var selection = command.Run(supervisors);
@@ -61,8 +61,8 @@ public class DisplayUsersTest
         var command = new DisplaySupervisors(reader);
         var supervisors = new List<Supervisor>
         {
-            new("P1", "name", "name@emal.com", ["S1, S2"]),
-            new("P2", "name2", "name2@emal.com", []),
+            new("P1", "name", "name@emal.com"),
+            new("P2", "name2", "name2@emal.com"),
         };
 
         var selection = command.Run(supervisors);
@@ -99,7 +99,7 @@ public class DisplayUsersTest
     {
         var reader = new SequentialCommandReader(["1", "q"]);
         var command = new DisplaySupervisorProfile(reader);
-        var s = new Supervisor("P2", "name", "name1@emal.com", ["S1"]);
+        var s = new Supervisor("P2", "name", "name1@emal.com");
 
         var selection = command.Run(s);
         Assert.That(selection, Is.Null);
@@ -110,7 +110,7 @@ public class DisplayUsersTest
     {
         var reader = new SequentialCommandReader(["q"]);
         var command = new DisplaySupervisorProfile(reader);
-        var s = new Supervisor("P2", "name", "name1@emal.com", ["S1"]);
+        var s = new Supervisor("P2", "name", "name1@emal.com");
 
         var selection = command.Run(s);
         Assert.That(selection, Is.Null);

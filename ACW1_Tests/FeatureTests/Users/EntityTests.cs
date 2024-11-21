@@ -64,14 +64,8 @@ public class EntityTests
         const string name = "Supervisor name";
         const string email = "supervisor@email.com";
         const string hash = "hash";
-        var ids = new HashSet<string>
-        {
-            "S1",
-            "S5",
-            "S33"
-        };
 
-        var supervisor = new Supervisor(id, name, email, ids, hash);
+        var supervisor = new Supervisor(id, name, email, hash);
         var xml = supervisor.Serialize();
         var parsed = User.Create(xml);
 
@@ -84,7 +78,6 @@ public class EntityTests
             Assert.That(supervisor.Id, Is.EqualTo(id));
             Assert.That(supervisor.Name, Is.EqualTo(name));
             Assert.That(supervisor.Email, Is.EqualTo(email));
-            Assert.That(supervisor.AssignedStudents, Is.SameAs(ids));
             Assert.That(supervisor.PasswordHash, Is.EqualTo(hash));
         });
 
@@ -94,7 +87,6 @@ public class EntityTests
             Assert.That(supervisor.Name, Is.EqualTo(parsedSupervisor.Name));
             Assert.That(supervisor.Email, Is.EqualTo(parsedSupervisor.Email));
             Assert.That(supervisor.PasswordHash, Is.EqualTo(parsedSupervisor.PasswordHash));
-            CollectionAssert.AreEquivalent(parsedSupervisor.AssignedStudents, supervisor.AssignedStudents);
         });
     }
 

@@ -7,6 +7,11 @@ namespace ACW1.Core.CLI.Menu;
 
 public class ListMenu<TReturn>(string header) : IMenu<TReturn>, IEnumerable<MenuOption<TReturn>>
 {
+    public ListMenu(string header, List<MenuOption<TReturn>> options) : this(header)
+    {
+        _options = options;
+    }
+    
     public string Prompt => "Enter command: ";
 
     private readonly List<MenuOption<TReturn>> _options = [];

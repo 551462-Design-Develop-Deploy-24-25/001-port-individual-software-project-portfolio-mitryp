@@ -33,6 +33,8 @@ public class Login(ICommandReader reader) : SimpleCommand<List<User>, User>("Log
             var passwordHash = new PasswordHash().HashPassword(password);
 
             user = users.FirstOrDefault(u => u.Id == id && u.PasswordHash == passwordHash);
+            if (user == null)
+                new LeafCommand(reader).Run("Credentials are invalid. Please try again");
         } while (user == null);
 
         return user;
