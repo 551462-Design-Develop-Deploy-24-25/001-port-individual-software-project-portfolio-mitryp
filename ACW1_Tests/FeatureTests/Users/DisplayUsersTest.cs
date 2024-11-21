@@ -71,7 +71,7 @@ public class DisplayUsersTest
     }
 
     [Test]
-    public void TestDisplayUserProfile1()
+    public void TestDisplayStudentProfile1()
     {
         var reader = new SequentialCommandReader(["1"]);
         var command = new DisplayStudentProfile(reader);
@@ -83,7 +83,7 @@ public class DisplayUsersTest
     }
 
     [Test]
-    public void TestDisplayUserProfile2()
+    public void TestDisplayStudentProfile2()
     {
         var reader = new SequentialCommandReader(["q"]);
         var command = new DisplayStudentProfile(reader);
@@ -92,5 +92,27 @@ public class DisplayUsersTest
         var selection = command.Run(s);
 
         Assert.That(selection, Is.EqualTo(DisplayStudentProfileAction.None));
+    }
+
+    [Test]
+    public void TestDisplayPsProfile1()
+    {
+        var reader = new SequentialCommandReader(["1", "q"]);
+        var command = new DisplaySupervisorProfile(reader);
+        var s = new Supervisor("P2", "name", "name1@emal.com", ["S1"]);
+
+        var selection = command.Run(s);
+        Assert.That(selection, Is.Null);
+    }
+
+    [Test]
+    public void TestDisplayPsProfile2()
+    {
+        var reader = new SequentialCommandReader(["q"]);
+        var command = new DisplaySupervisorProfile(reader);
+        var s = new Supervisor("P2", "name", "name1@emal.com", ["S1"]);
+
+        var selection = command.Run(s);
+        Assert.That(selection, Is.Null);
     }
 }
